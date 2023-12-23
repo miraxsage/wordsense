@@ -1,7 +1,7 @@
 import { Link } from "@inertiajs/react";
 import { useRef } from "react";
 
-export default function (page) {
+export default function ({ children }) {
     let ref = useRef();
     if (!ref.current) ref.current = 0;
     ref.current++;
@@ -13,7 +13,7 @@ export default function (page) {
                 <br />
                 <Link href="/profile">Profile</Link>
             </header>
-            {page}
+            {children}
         </div>
     );
 }
