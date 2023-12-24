@@ -2,7 +2,7 @@
     <picture>
       <source width="360" media="(prefers-color-scheme: dark)" srcset="https://github.com/miraxsage/wordsense/assets/98733648/538b5d06-e5af-4c16-8ceb-be2b291f0e10">
       <source width="360" media="(prefers-color-scheme: light)" srcset="https://github.com/miraxsage/wordsense/assets/98733648/f9b00737-ec1c-4aae-8cf5-136289ce62e8">
-      <img alt="WordSense" src="https://github.com/miraxsage/wordsense/assets/98733648/72b811ca-6c46-45af-b424-8ecbb294b38c">
+      <img width="360" alt="WordSense" src="https://github.com/miraxsage/wordsense/assets/98733648/72b811ca-6c46-45af-b424-8ecbb294b38c">
     </picture>
 </p>
 
