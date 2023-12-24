@@ -1,4 +1,5 @@
 import { Link, router, usePage } from "@inertiajs/react";
+import { Button } from "@mui/material";
 import { useState } from "react";
 
 export default function Login({ status }) {
@@ -22,9 +23,7 @@ export default function Login({ status }) {
                 <div style={{ color: "red" }}>{errors.password}</div>
             )}
             <br />
-            <button type="submit" onClick={submit}>
-                Войти
-            </button>
+            <Button variant="contained" onClick={submit}>Войти</Button>
             <br />
             <Link href={route("register")}>Haven't you registered yet?</Link>/
             <Link href={route("password.forgot")}>Forgot password?</Link>
