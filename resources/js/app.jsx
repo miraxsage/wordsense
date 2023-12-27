@@ -1,7 +1,49 @@
 import '../css/app.css';
+import IntroLight from '../fonts/IntroLight.woff2';
+import IntroBook from '../fonts/IntroBook.woff2';
+import { blue } from '@mui/material/colors';
 
 import { createInertiaApp } from "@inertiajs/react";
 import { createRoot } from "react-dom/client";
+import { CssBaseline } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { StyledEngineProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: "#ff0000",
+      main: "#5643a2",
+      dark: "#3c2c7c",
+    },
+    secondary: {
+      light: "#7fc2ac",
+      main: "#259a85",
+      dark: "#2a9068",
+    }
+  },
+  typography: {
+    fontFamily: 'Intro',
+    fontSize: 15,
+    button: {
+      fontSize: "1.1rem",
+      textTransform: "none"
+    }
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+      @font-face {
+        font-family: Intro; 
+        font-style: normal;
+        font-display: swap;
+        font-weight: 400;
+        src: url("${IntroBook}"); 
+      }  
+      `,
+    },
+  },
+});
 
 createInertiaApp({
     resolve(name) {
@@ -9,6 +51,12 @@ createInertiaApp({
         return pages[`./Pages/${name}.jsx`];
     },
     setup({ el, App, props }) {
-        createRoot(el).render(<App {...props} />);
+        createRoot(el).render((
+          <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <App {...props} />
+            </ThemeProvider>
+          </StyledEngineProvider>));
     },
 });

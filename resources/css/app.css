@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#animationed-background{
+    --gradient-color-1: #d1c5fe;
+    --gradient-color-2: #e3fbd8;
+    --gradient-color-3: #ffffff;
+    --gradient-color-4: #cce5f6;
+    --gradient-color-1: #6561e2;
+    --gradient-color-2: #caf0b8;
+    --gradient-color-3: #ffffff;
+    --gradient-color-4: #92d6f8;
+}
+.overlap{
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(2, 2);
+    background: white;
+    filter: blur(115px);
+    mix-blend-mode: plus-lighter;
+    z-index: -1;
+}

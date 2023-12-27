@@ -5,6 +5,7 @@ export default {
     './resources/views/**/*.blade.php',
     './resources/js/**/*.jsx',
   ],
+ // important: '#app',
   theme: {
     extend: {},
   },
