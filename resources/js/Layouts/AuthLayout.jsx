@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const OnAuthSubmitContext = createContext();
 
@@ -6,7 +7,7 @@ export function useOnAuthSubmit(){
     return useContext(OnAuthSubmitContext);
 }
 
-export default function AuthLayout({children}){
+export default function AuthLayout({children, target}){
     let ref = useRef();
     ref.current = (ref.current ?? 0) + 1;
     console.log("auth", ref.current);
@@ -25,12 +26,24 @@ export default function AuthLayout({children}){
     let onSubmit = (e) => {
         submitHandlers.forEach(handler => handler(e));
     };
+    console.log("TARG", target)
     return <OnAuthSubmitContext.Provider value={(handler) => submitHandlers.push(handler)}>
-        <div className="grid items-center justify-items-center h-svh w-svw">
-            <form onSubmit={onSubmit} className="relative flex flex-col gap-4 sm:w-6/12 w-9/12 max-w-[350px]">
-                <div className="overlap" ref={overlapRef}></div>
-                {children}
-            </form>
-        </div>;
+            <div className="grid items-center justify-items-center h-svh w-svw">
+                <form onSubmit={onSubmit} className="relative sm:w-6/12 w-9/12 max-w-[350px]">
+                    <div className="overlap" ref={overlapRef}></div>
+                    <AnimatePresence initial={false} mode="wait">
+                        <motion.div
+                            transition={{duration: .15}}
+                            initial={{opacity:0,transform:"scale(0.97)"}}
+                            animate={{opacity:1,transform:"scale(1)"}}
+                            key={`motion${target}`}
+                            className="flex flex-col gap-4"
+                            exit={{opacity:0,transform:"scale(0.93)"}}
+                            >
+                            {children}
+                        </motion.div>
+                    </AnimatePresence>
+                </form>
+            </div>
     </OnAuthSubmitContext.Provider>
 }
