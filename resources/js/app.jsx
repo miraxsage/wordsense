@@ -8,6 +8,8 @@ import { createRoot } from "react-dom/client";
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { StyledEngineProvider } from '@mui/material/styles';
+import MainLayout from './Layouts/MainLayout';
+import AuthLayout from './Layouts/AuthLayout';
 
 const theme = createTheme({
   palette: {
@@ -48,7 +50,17 @@ const theme = createTheme({
 createInertiaApp({
     resolve(name) {
         const pages = import.meta.glob("./Pages/**/*.jsx", { eager: true });
-        return pages[`./Pages/${name}.jsx`];
+        let page = pages[`./Pages/${name}.jsx`];
+        if(page.default.layout)
+          return page;
+        if(name.startsWith("Auth/"))
+          page.default.layout = (page => 
+            <MainLayout target={name}>
+              <AuthLayout>
+                {page}
+              </AuthLayout>
+            </MainLayout>);
+        return page;
     },
     setup({ el, App, props }) {
         createRoot(el).render((

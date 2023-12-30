@@ -1,10 +1,13 @@
 import { router } from "@inertiajs/react";
-import { Link } from "@mui/material";
+import { Button, Link } from "@mui/material";
 
-export default function({method, data, headers, ...props}){
+export default function({href, method, data, headers, as = "Link", ...props}){
     function onClick(e){
         e.preventDefault();
-        router.visit(props.href, { method, data, headers })
+        if(href == -1)
+            window.history.back()
+        else
+            router.visit(href, { method, data, headers })
     }
-    return <Link {...props} onClick={onClick} />;
+    return as == "Link" ? <Link {...props} onClick={onClick} /> : <Button {...props} onClick={onClick} />;
 }
