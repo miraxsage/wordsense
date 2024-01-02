@@ -1,6 +1,7 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import logo from "./logo.svg";
+
+import SvgComponent from "./Svg";
 
 export default function WordSenseLogo({mode = "regular", updateDelay = 0, ...props}){
     let imgRef = useRef();
@@ -23,7 +24,7 @@ export default function WordSenseLogo({mode = "regular", updateDelay = 0, ...pro
     }, [])
     if(mode == "forAuth"){
         return <div>
-            {createPortal(<img ref={imgRef} src={logo} {...props} className="absolute w-[350px] transition-[top] transition" />, document.body)}
+            {createPortal(<SvgComponent subRef={imgRef} {...props} className="absolute w-[350px] transition-[top] transition" />, document.body)}
             <div ref={fakeRef} className="mb-[10%] w-full aspect-[822/350]"></div>
         </div>
     }

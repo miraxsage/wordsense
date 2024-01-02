@@ -15,14 +15,19 @@ import { AnimatePresence } from 'framer-motion';
 const theme = createTheme({
   palette: {
     primary: {
-      light: "#ff0000",
-      main: "#5643a2",
-      dark: "#3c2c7c",
+      light: "#7464a2",
+      main: "#5a4793",
+      dark: "#3a316a",
     },
     secondary: {
-      light: "#7fc2ac",
-      main: "#259a85",
-      dark: "#2a9068",
+      light: "#9acee1",
+      main: "#57b0d9",
+      dark: "#4489bb",
+    },
+    thirdary: {
+      light: "#90d2c2",
+      main: "#53c6b7",
+      dark: "#42968b"
     }
   },
   typography: {
