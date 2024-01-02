@@ -3,6 +3,7 @@ import { useState } from "react";
 import AuthLayout, { useOnAuthSubmit } from "../../Layouts/AuthLayout";
 import { Alert, Button, TextField } from "@mui/material";
 import Link from "../../Components/Link";
+import AuthTextField from "../../Components/AuthTextField";
 
 export default function Password({ mode = "request", email, token, success }) {
     let { data, setData, errors, post } = useForm({
@@ -20,7 +21,7 @@ export default function Password({ mode = "request", email, token, success }) {
     }
     useOnAuthSubmit()(send);
     function input(field, label, type = "text", readOnly = false, helperText = "") {
-        return <TextField
+        return <AuthTextField
                 type={type}
                 name={field}
                 value={data[field]}

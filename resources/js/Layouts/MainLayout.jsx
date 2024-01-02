@@ -1,6 +1,7 @@
 import { Link } from "@inertiajs/react";
 import { useEffect, useRef, useState } from "react";
 import Gradient from "../Utilities/GradientBackgoundAnimation";
+import { createPortal } from "react-dom";
 
 export default function ({ children, target }) {
     let ref = useRef();
@@ -12,7 +13,7 @@ export default function ({ children, target }) {
     }, []);
     console.log(target);
     return <div>
-        <canvas id="animationed-background" className="absolute left-0 top-0 w-full h-svh -z-10"></canvas>
+        <canvas id="animationed-background" className="fixed left-0 top-0 w-full -z-10 h-svh"></canvas>
         {children}
     </div>;
    /* let ref = useRef();

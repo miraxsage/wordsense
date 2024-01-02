@@ -3,6 +3,7 @@ import AuthLayout, { useOnAuthSubmit } from "../../Layouts/AuthLayout";
 import { Button, TextField, Typography } from "@mui/material";
 import Link from "../../Components/Link";
 import MainLayout from "../../Layouts/MainLayout";
+import AuthTextField from "../../Components/AuthTextField";
 
 
 function Register({ ...props }) {
@@ -13,7 +14,7 @@ function Register({ ...props }) {
         password_confirmation: "",
     });
     function input(field, label, type = "text") {
-        return <TextField
+        return <AuthTextField
                 type={type}
                 name={field}
                 value={data[field]}

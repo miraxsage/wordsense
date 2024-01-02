@@ -12,6 +12,7 @@
     --gradient-color-3: #ffffff;
     --gradient-color-4: #92d6f8;
 }
+
 .overlap{
     content: " ";
     position: absolute;
@@ -28,5 +29,7 @@
     filter: blur(150px);
     mix-blend-mode: plus-lighter;
     z-index: -1;
+}
+.overlap.animated{
     transition: all 3s;
 }
