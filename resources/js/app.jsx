@@ -11,6 +11,7 @@ import { StyledEngineProvider } from '@mui/material/styles';
 import MainLayout from './Layouts/MainLayout';
 import AuthLayout from './Layouts/AuthLayout';
 import { AnimatePresence } from 'framer-motion';
+import ProfileLayout from './Layouts/ProfileLayout';
 
 const theme = createTheme({
   palette: {
@@ -65,6 +66,13 @@ createInertiaApp({
                 <AuthLayout target={name}>
                   {page}
                 </AuthLayout>            
+            </MainLayout>);
+        else
+          page.default.layout = (page => 
+            <MainLayout target={name}>
+              <ProfileLayout>
+                {page} 
+              </ProfileLayout>
             </MainLayout>);
         return page;
     },

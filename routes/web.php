@@ -47,4 +47,4 @@ Route::middleware("guest")->group(function(){
 
 Route::get('/profile', function () {
     return Inertia::render('Profile/Profile', ['name' => 'Profile from routes']);
-})->middleware('auth')->name('profile');
+})->name('profile');

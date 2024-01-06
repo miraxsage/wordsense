@@ -2,8 +2,12 @@ import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 import SvgComponent from "./Svg";
+import classes from "classnames";
 
-export default function WordSenseLogo({mode = "regular", updateDelay = 0, ...props}){
+
+export default function WordSenseLogo({mode = "regular", updateDelay = 0, className, ...props}){
+    if(mode != "forAuth")
+        return <SvgComponent {...props} className={classes(className)} />;
     let imgRef = useRef();
     let fakeRef = useRef();
     let onChange = () => {
@@ -22,11 +26,8 @@ export default function WordSenseLogo({mode = "regular", updateDelay = 0, ...pro
         window.addEventListener("resize", onChange);
         return () => { window.removeEventListener("resize", onChange); };
     }, [])
-    if(mode == "forAuth"){
-        return <div>
-            {createPortal(<SvgComponent subRef={imgRef} {...props} className="absolute w-[350px] transition-[top] transition" />, document.body)}
-            <div ref={fakeRef} className="mb-[10%] w-full aspect-[822/350]"></div>
-        </div>
-    }
-    return <img src={logo} {...props} />
+    return <div>
+        {createPortal(<SvgComponent subRef={imgRef} {...props} className={classes(className, "absolute w-[350px] transition-[top] transition")} />, document.body)}
+        <div ref={fakeRef} className="mb-[10%] w-full aspect-[822/350]"></div>
+    </div>
 }
