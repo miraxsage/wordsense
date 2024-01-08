@@ -8,6 +8,7 @@
     --gradient-color-3: #ffffff;
     --gradient-color-4: #92d6f8;
 }
+
 #layout-non-animationed-background {
     background: linear-gradient(transparent, white 110%),
         radial-gradient(
