@@ -417,6 +417,7 @@ function normalizeColor(hexCode) {
             u_waveLayers: new this.minigl.Uniform({
                 value: [],
                 excludeFrom: "fragment",
+                
                 type: "array"
             })
         };
@@ -457,6 +458,8 @@ function normalizeColor(hexCode) {
         return !!window.document.hidden || (!this.conf.playing || (parseInt(e, 10) % 2 == 0 || void 0))
     }
     updateFrequency(e) {
+
+
         this.freqX += e, this.freqY += e
     }
     toggleColor(index) {

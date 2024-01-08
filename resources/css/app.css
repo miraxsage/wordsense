@@ -2,34 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-#animationed-background{
-    --gradient-color-1: #d1c5fe;
-    --gradient-color-2: #e3fbd8;
-    --gradient-color-3: #ffffff;
-    --gradient-color-4: #cce5f6;
+#layout-animationed-background {
     --gradient-color-1: #6561e2;
     --gradient-color-2: #caf0b8;
     --gradient-color-3: #ffffff;
     --gradient-color-4: #92d6f8;
 }
-
-.overlap{
-    content: " ";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 0px;
-    height: 0px;
-    top: 50%;
-    left: 50%;
-    width: 150%;
-    height: 150%;
-    transform: translate(-50%, -50%);
-    background: white;
-    filter: blur(150px);
-    mix-blend-mode: plus-lighter;
-    z-index: -1;
-}
-.overlap.animated{
-    transition: all 3s;
+#layout-non-animationed-background {
+    background: linear-gradient(transparent, white 110%),
+        radial-gradient(
+            circle closest-corner at 30% center,
+            #98d8b7,
+            transparent 150%
+        ),
+        linear-gradient(157deg, #635ee4 0%, #68c7ff 25%, white);
 }

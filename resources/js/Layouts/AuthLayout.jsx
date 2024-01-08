@@ -5,66 +5,95 @@ import { createPortal } from "react-dom";
 
 const OnAuthSubmitContext = createContext();
 
-export function useOnAuthSubmit(){
+export function useOnAuthSubmit() {
     return useContext(OnAuthSubmitContext);
 }
 
-export default function AuthLayout({children, target}){
-    let ref = useRef();
-    ref.current = (ref.current ?? 0) + 1;
-    console.log("auth", ref.current);
+export default function AuthLayout({ children, target }) {
     let overlapRef = useRef();
-    let ratio = {min: {square: 154, blur: 65}, max: {square: 586, blur: 135}};
     let refrashOverlapId = null;
     let refreshOverlap = (withoutAnimation = false) => {
-        if(refrashOverlapId)
-            clearTimeout(refrashOverlapId);
-        if(withoutAnimation)
-            overlapRef.current.classList.remove("animated");
+        if (refrashOverlapId) clearTimeout(refrashOverlapId);
+        if (withoutAnimation)
+            overlapRef.current.classList.remove(
+                "transition-all",
+                "duration-[3s]",
+            );
         let refresh = () => {
             let form = overlapRef.current.parentElement;
-            let {width, height} = form.getBoundingClientRect();
-            let square = (width * height) / 500 - ratio.min.square;
-            //let blur = Math.round((square / (ratio.max.square - ratio.min.square)) * (ratio.max.blur - ratio.min.blur) + ratio.min.blur);
-            overlapRef.current.style.width = Math.min(width * 1.5, document.body.clientWidth) + "px";
-            overlapRef.current.style.height = Math.min(height * 1.2, document.body.clientHeight) + "px";
-            if(withoutAnimation)
-                requestAnimationFrame(() => overlapRef.current.classList.add("animated"));
+            let { width, height } = form.getBoundingClientRect();
+            let vw = Math.max(
+                document.documentElement.clientWidth || 0,
+                window.innerWidth || 0,
+            );
+            let vh = Math.max(
+                document.documentElement.clientHeight || 0,
+                window.innerHeight || 0,
+            );
+            overlapRef.current.style.width = Math.min(width * 1.5, vw) + "px";
+            overlapRef.current.style.height = Math.min(height * 1.2, vh) + "px";
+            if (withoutAnimation)
+                requestAnimationFrame(() =>
+                    overlapRef.current.classList.add(
+                        "transition-all",
+                        "duration-[3s]",
+                    ),
+                );
         };
-        if(withoutAnimation)
-            refresh();
-        else
-            refrashOverlapId = setTimeout(refresh, 350);
-    }
+        if (withoutAnimation) refresh();
+        else refrashOverlapId = setTimeout(refresh, 350);
+    };
     useEffect(refreshOverlap);
     useEffect(() => {
         let refreshOverlapOnResize = () => refreshOverlap(true);
-        window.addEventListener('resize', refreshOverlapOnResize);
-        return () => window.removeEventListener('resize', refreshOverlapOnResize);
+        window.addEventListener("resize", refreshOverlapOnResize);
+        return () =>
+            window.removeEventListener("resize", refreshOverlapOnResize);
     }, []);
     let submitHandlers = [];
     let onSubmit = (e) => {
-        submitHandlers.forEach(handler => handler(e));
+        submitHandlers.forEach((handler) => handler(e));
     };
-    console.log("TARG", target)
-    return <OnAuthSubmitContext.Provider value={(handler) => submitHandlers.push(handler)}>
-            <div className="grid items-center justify-items-center min-h-[100svh] w-full">
-                <form onSubmit={onSubmit} className="relative sm:w-6/12 w-9/12 max-w-[350px] py-10">
-                    <WordSenseLogo mode="forAuth" updateDelay="0.2" />
-                    <div ref={overlapRef} className="overlap animated"></div>
+    return (
+        <div className="auth-container absolute top-0 grid h-[100svh] w-full items-center justify-items-center overflow-y-auto">
+            <form
+                onSubmit={onSubmit}
+                className="relative w-9/12 max-w-[350px] py-10 sm:w-6/12"
+            >
+                <WordSenseLogo mode="forAuth" updateDelay="0.2" />
+                <motion.div
+                    initial={{ transform: "scale(0) translate(-50%, -50%)" }}
+                    animate={{ transform: "scale(1) translate(-50%, -50%)" }}
+                    transition={{ duration: 1 }}
+                    ref={overlapRef}
+                    className="absolute left-1/2 top-1/2 -z-10 h-[150%] max-h-svh w-[150%] max-w-[calc(100vw-20px)] bg-white mix-blend-plus-lighter blur-[150px] transition-all duration-[3s]"
+                />
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                >
                     <AnimatePresence initial={false} mode="wait">
                         <motion.div
-                            transition={{duration: .15}}
-                            initial={{opacity:0,transform:"scale(0.97)"}}
-                            animate={{opacity:1,transform:"scale(1)"}}
+                            transition={{ duration: 0.15 }}
+                            initial={{ opacity: 0, transform: "scale(0.97)" }}
+                            animate={{ opacity: 1, transform: "scale(1)" }}
                             key={`motion${target}`}
                             className="flex flex-col gap-4"
-                            exit={{opacity:0,transform:"scale(0.93)"}}
+                            exit={{ opacity: 0, transform: "scale(0.93)" }}
+                        >
+                            <OnAuthSubmitContext.Provider
+                                value={(handler) =>
+                                    submitHandlers.push(handler)
+                                }
                             >
-                            {children}
+                                {children}
+                            </OnAuthSubmitContext.Provider>
                         </motion.div>
                     </AnimatePresence>
-                </form>
-            </div>
-    </OnAuthSubmitContext.Provider>
+                </motion.div>
+            </form>
+        </div>
+    );
 }
