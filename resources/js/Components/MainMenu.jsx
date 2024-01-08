@@ -4,6 +4,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
+import { router } from "@inertiajs/react";
 
 export default function MainMenu(){
     let [tab, setTab] = useState(1);
@@ -26,7 +27,7 @@ export default function MainMenu(){
     let profileMenuClose = ({...args}) => {
         setProfileMenuAnchor(null);
     };
-    let profMenuIsOpen = Boolean(profileMenuAnchor);
+    let profileMenuIsOpen = Boolean(profileMenuAnchor);
     return <div className="w-full flex gap-4 items-end">
             <Box className="main-menu flex-grow" sx={{ borderBottom: 1, borderColor: 'divider', position: "relative" }}>
                 <Tabs className="mb-[-1px]" value={tab} onChange={(e, v) => setTab(v)}>
@@ -50,9 +51,9 @@ export default function MainMenu(){
                 <IconButton 
                     size="small" 
                     onClick={profileMenuClick}
-                    aria-controls={profMenuIsOpen ? 'profile-menu' : undefined}
+                    aria-controls={profileMenuIsOpen ? 'profile-menu' : undefined}
                     aria-haspopup="true"
-                    aria-expanded={profMenuIsOpen ? 'true' : undefined}
+                    aria-expanded={profileMenuIsOpen ? 'true' : undefined}
                 >
                     <Avatar sx={{ width: 40, height: 40 }}>
                         <PersonIcon />
@@ -81,7 +82,7 @@ export default function MainMenu(){
                     </ListItemIcon>
                     Настройки
                 </MenuItem>
-                <MenuItem id="profile-menu_logout-item">
+                <MenuItem id="profile-menu_logout-item" onClick={() => router .visit(route("login"))}>
                     <ListItemIcon>
                         <LogoutIcon fontSize="small" />
                     </ListItemIcon>

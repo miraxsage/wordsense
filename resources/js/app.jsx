@@ -60,19 +60,9 @@ createInertiaApp({
         let page = pages[`./Pages/${name}.jsx`];
         if(page.default.layout)
           return page;
-        if(name.startsWith("Auth/"))
           page.default.layout = (page => 
             <MainLayout target={name}>
-                <AuthLayout target={name}>
-                  {page}
-                </AuthLayout>            
-            </MainLayout>);
-        else
-          page.default.layout = (page => 
-            <MainLayout target={name}>
-              <ProfileLayout>
-                {page} 
-              </ProfileLayout>
+                {page}          
             </MainLayout>);
         return page;
     },

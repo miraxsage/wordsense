@@ -8,11 +8,11 @@ import AuthLayout, { useOnAuthSubmit } from "../../Layouts/AuthLayout";
 import AuthTextField from "../../Components/AuthTextField";
 
 function Login({ status }) {
-    let [num1] = useState(0);
-    console.log("login", num1);
     let [data, setData] = useState({ email: "", password: "" });
     function submit(e) {
         e.preventDefault();
+        router.visit(route("profile"));
+        return;
         router.post("/login", { ...data });
     }
     useOnAuthSubmit()(submit);

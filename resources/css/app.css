@@ -2,15 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-#animationed-background{
-    --gradient-color-1: #d1c5fe;
+#layout-animationed-background{
+    /*--gradient-color-1: #d1c5fe;
     --gradient-color-2: #e3fbd8;
     --gradient-color-3: #ffffff;
-    --gradient-color-4: #cce5f6;
+    --gradient-color-4: #cce5f6;*/
     --gradient-color-1: #6561e2;
     --gradient-color-2: #caf0b8;
     --gradient-color-3: #ffffff;
     --gradient-color-4: #92d6f8;
+}
+#layout-non-animationed-background{
+    opacity: 0.8;
+    background: linear-gradient(transparent, white 110%), radial-gradient(circle closest-corner at 30% center, #98d8b7, transparent 150%), linear-gradient(157deg, #635ee4 0%, #68c7ff 25%, white);
 }
 
 .overlap{
@@ -32,4 +36,22 @@
 }
 .overlap.animated{
     transition: all 3s;
+}
+
+.profile-blur{
+    filter: blur(200px);
+    opacity: 0.5;
+    width: 100%;
+    transform: translate(0%, -21%);
+    mix-blend-mode: plus-lighter;
+}
+.profile-blur:before{
+    content: "";
+    background: white;
+    display: block;
+    position: absolute;
+    left: -215px;
+    top: -75px;
+    width: 500px;
+    height: 500px; 
 }
