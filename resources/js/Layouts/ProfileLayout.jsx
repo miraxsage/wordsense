@@ -2,16 +2,28 @@ import MainMenu from "../Components/MainMenu";
 import WordSenseLogo from "../Components/WordSenseLogo";
 import { cubicBezier } from "framer-motion";
 import { motion } from "framer-motion";
+import classes from "classnames";
+import { useTheme } from "@emotion/react";
 
 export default function ProfileLayout({
     children,
     useEnterAnimation,
     ...props
 }) {
+    let theme = useTheme();
+    let isLight = theme.palette.mode == "light";
     return (
         <div className="container relative mx-auto h-full min-h-svh">
             <motion.div
-                className="transform-[translate(0%,-21%)] absolute -z-10 h-full w-full bg-white opacity-50 mix-blend-plus-lighter blur-[200px]"
+                className={classes(
+                    "transform-[translate(0%,-21%)] absolute -z-10 h-full w-full opacity-50 blur-[200px]",
+                    {
+                        "mix-blend-plus-lighter": isLight,
+                        "bg-white": isLight,
+                        "mix-blend-darken": !isLight,
+                        "bg-[#0d0f1f]": !isLight,
+                    },
+                )}
                 initial={
                     !useEnterAnimation
                         ? false
@@ -21,7 +33,7 @@ export default function ProfileLayout({
                           }
                 }
                 animate={{
-                    opacity: 0.5,
+                    opacity: isLight ? 0.5 : 0,
                     transform: "scale(1) translate(0%, -21%)",
                 }}
                 exit={{
@@ -33,7 +45,15 @@ export default function ProfileLayout({
                     ease: cubicBezier(0.02, 0.725, 0.3, 0.995),
                 }}
             >
-                <div className="absolute left-[-215px] top-[-75px] block h-[500px] w-[500px] bg-white"></div>
+                <div
+                    className={classes(
+                        "absolute left-[-215px] top-[-75px] block h-[500px] w-[500px]",
+                        {
+                            "bg-white": isLight,
+                            "bg-[#0d0f1f]": !isLight,
+                        },
+                    )}
+                ></div>
             </motion.div>
             <motion.div
                 className="grid h-full w-full grid-rows-[auto_minmax(0,_1fr)]"

@@ -3,15 +3,38 @@ import { darken, lighten } from "@mui/material";
 import * as React from "react"
 const SvgComponent = ({subRef, ...props}) => {
   let theme = useTheme();
-  let primary = theme.palette.primary.main;
-  let primaryLight = theme.palette.primary.light;
-  let primaryDark = theme.palette.primary.dark;
-  let secondary = theme.palette.secondary.main;
-  let secondaryLight = theme.palette.secondary.light;
-  let secondaryDark = theme.palette.secondary.dark;
-  let thirdary = theme.palette.thirdary.main;
-  let thirdaryDark = theme.palette.thirdary.dark;
-  let thirdaryLight = theme.palette.thirdary.light;
+  // let primary = theme.palette.primary.main;
+  // let primaryLight = theme.palette.primary.light;
+  // let primaryDark = theme.palette.primary.dark;
+  // let secondary = theme.palette.secondary.main;
+  // let secondaryLight = theme.palette.secondary.light;
+  // let secondaryDark = theme.palette.secondary.dark;
+  // let thirdary = theme.palette.thirdary.main;
+  // let thirdaryDark = theme.palette.thirdary.dark;
+  // let thirdaryLight = theme.palette.thirdary.light;
+
+  let senseTopColor = theme.palette.secondary.main;
+  let senseBottomColor = darken(theme.palette.primary.main, 0.2);
+  let iconTopColor = theme.palette.thirdary.main;
+  let iconCenterFromColor = theme.palette.secondary.main;
+  let iconCenterToColor = theme.palette.secondary.dark;
+  let iconBottomColor = theme.palette.primary.main;
+  let wordShadowColor = lighten(theme.palette.secondary.main, 0.6);
+  let wordUpColor = theme.palette.primary.light;
+  let wordDownColor = lighten(theme.palette.primary.dark, 0.1);
+
+  if(theme.palette.mode == "dark"){
+    wordUpColor = theme.palette.contrast.light;
+    wordDownColor = darken("#7e8ca6", 0.1);
+    wordShadowColor = lighten("#282634", 0.05);
+    iconTopColor = wordUpColor;
+    iconBottomColor = darken(wordDownColor, 0.1);
+    iconCenterToColor = iconBottomColor;
+    iconCenterFromColor = iconTopColor;
+    senseBottomColor = darken(theme.palette.secondary.main, 0.4);
+    senseTopColor = lighten(theme.palette.primary.main, 0.5);
+  }
+
   return <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 349.3 116.9"
@@ -20,43 +43,43 @@ const SvgComponent = ({subRef, ...props}) => {
   >
     //sense (s)
     <linearGradient id="SVGID_00000035490822352099734820000018256424729509608584_" x1={150.713} x2={150.713} y1={74.239} y2={96.816} gradientUnits="userSpaceOnUse">
-      <stop offset={0} style={{ stopColor: secondary }} />
-      <stop offset={1} style={{ stopColor: darken(primary, 0.2) }} />
+      <stop offset={0} style={{ stopColor: senseTopColor }} />
+      <stop offset={1} style={{ stopColor: senseBottomColor }} />
     </linearGradient>
     <path d="M153.1 74.9c-4.7 0-9.8 2-9.8 6.7 0 3.5 3.8 4.4 7.4 4.8 3.6.6 5.5 1.1 5 3.5-.6 2.5-3.7 3.5-6.5 3.5-2.7 0-5.5-.5-5.1-3.6H141c-.7 4.6 3.3 6.2 7.7 6.2 4.8-.1 9.3-1.8 10.2-6 1.1-4.8-3.1-5.7-7.3-6.3-3.4-.5-5.1-1-5.1-2.6 0-2.6 3.2-3.7 6.1-3.7 2.7 0 5 .8 4.7 3.2h3.1c.8-3.7-3.1-5.7-7.3-5.7z"
       style={{ fill: "url(#SVGID_00000035490822352099734820000018256424729509608584_)" }} />
     //sense (e)
     <linearGradient id="SVGID_00000018219377683289324850000012966121563611776170_" x1={173.195} x2={173.195} y1={74.239} y2={96.816} gradientUnits="userSpaceOnUse">
-      <stop offset={0} style={{ stopColor: secondary }} />
-      <stop offset={1} style={{ stopColor: darken(primary, 0.2) }} />
+      <stop offset={0} style={{ stopColor: senseTopColor }} />
+      <stop offset={1} style={{ stopColor: senseBottomColor }} />
     </linearGradient>
     <path d="M176 74.8c-5.7.1-10.5 3.1-12.4 9.3-2 7.2 1.4 11.9 8.7 11.8 2.4 0 4.8-.4 7.4-1.5l.4-2.9c-2.1.9-4.8 1.7-7.1 1.7-5.2 0-7.9-2.6-6.6-7.9 1.8 1.5 4.9 2.1 7.6 2.1 3.6 0 8.2-1.6 9.2-6 1-4.6-3-6.6-7.2-6.6zm4.1 6.6c-.8 2.6-3.8 3.4-6.1 3.4s-5.3-.6-6.7-2c1.5-3.6 4.6-5.4 8.1-5.4 2.5.1 5.5 1.2 4.7 4z"
       style={{ fill: "url(#SVGID_00000018219377683289324850000012966121563611776170_)" }} />
     //sense (n)
     <linearGradient id="SVGID_00000015347097653524263970000001851551191406439843_" x1={196.3} x2={196.3} y1={74.239} y2={96.816} gradientUnits="userSpaceOnUse">
-      <stop offset={0} style={{ stopColor: secondary }} />
-      <stop offset={1} style={{ stopColor: darken(primary, 0.2) }} />
+      <stop offset={0} style={{ stopColor: senseTopColor }} />
+      <stop offset={1} style={{ stopColor: senseBottomColor }} />
     </linearGradient>
     <path d="m204.9 91.1 1.6-7.6c1-4.9-.9-8.6-6.3-8.6-3 0-6.2 1-8 3.8.7-3.1-1.3-4.3-4.8-3.5l-.4 2.1c2.8-.3 2.4.7 1.7 3.7l-3.1 14.5h3.3l2.5-11.9c.8-3.7 3.9-6.1 7.3-6.1 3.3 0 5.2 2.3 4.5 5.9l-1.6 7.7c-.9 4.2 1 5 4.9 4.4l.5-2.3c-2.3.4-2.4-.2-2.1-2.1z"
       style={{ fill: "url(#SVGID_00000015347097653524263970000001851551191406439843_)" }} />
     //sense (s)
     <linearGradient id="SVGID_00000143615342815753603230000011021333480339440561_" x1={219.577} x2={219.577} y1={74.239} y2={96.816} gradientUnits="userSpaceOnUse">
-      <stop offset={0} style={{ stopColor: secondary }} />
-      <stop offset={1} style={{ stopColor: darken(primary, 0.2) }} />
+      <stop offset={0} style={{ stopColor: senseTopColor }} />
+      <stop offset={1} style={{ stopColor: senseBottomColor }} />
     </linearGradient>
     <path d="M222 74.9c-4.7 0-9.8 2-9.8 6.7 0 3.5 3.8 4.4 7.4 4.8 3.6.6 5.5 1.1 5 3.5-.5 2.5-3.7 3.5-6.5 3.5-2.7 0-5.5-.5-5.1-3.6h-3.1c-.7 4.6 3.3 6.2 7.7 6.2 4.8-.1 9.3-1.8 10.2-6 1.1-4.8-3.1-5.7-7.3-6.3-3.4-.5-5.1-1-5.1-2.6 0-2.6 3.2-3.7 6-3.7 2.7 0 5 .8 4.7 3.2h3.1c.9-3.7-2.9-5.7-7.2-5.7z"
       style={{ fill: "url(#SVGID_00000143615342815753603230000011021333480339440561_)" }} />
     //sense (e)
     <linearGradient id="SVGID_00000114031440273270433240000012366196662989916817_" x1={242.193} x2={242.193} y1={74.239} y2={96.816} gradientUnits="userSpaceOnUse">
-      <stop offset={0} style={{ stopColor: secondary }} />
-      <stop offset={1} style={{ stopColor: darken(primary, 0.2) }} />
+      <stop offset={0} style={{ stopColor: senseTopColor }} />
+      <stop offset={1} style={{ stopColor: senseBottomColor }} />
     </linearGradient>
     <path d="M245 74.8c-5.7.1-10.5 3.1-12.4 9.3-2 7.2 1.4 11.9 8.7 11.8 2.4 0 4.8-.4 7.4-1.5l.4-2.9c-2.1.9-4.8 1.7-7.1 1.7-5.2 0-7.9-2.6-6.6-7.9 1.8 1.5 4.9 2.1 7.6 2.1 3.6 0 8.2-1.6 9.2-6 1-4.6-3.1-6.6-7.2-6.6zm4 6.6c-.8 2.6-3.8 3.4-6.1 3.4s-5.3-.6-6.7-2c1.5-3.6 4.6-5.4 8.1-5.4 2.6.1 5.5 1.2 4.7 4z"
       style={{ fill: "url(#SVGID_00000114031440273270433240000012366196662989916817_)" }} />
 
     <linearGradient id="SVGID_00000000944481723025398090000015899073193921051302_" x1={55.591} x2={55.591} y1={-8.991} y2={116.514} gradientUnits="userSpaceOnUse">
-      <stop offset={0} style={{ stopColor: thirdary }} />
-      <stop offset={1} style={{ stopColor: primary }} />
+      <stop offset={0} style={{ stopColor: iconTopColor }} />
+      <stop offset={1} style={{ stopColor: iconBottomColor }} />
     </linearGradient>
     // icon linear rhomb
     <path d="M36.2 72.1c-1.2.9-1.6 2.4-.8 3.7 1.3 2.3 2.6 4.5 3.8 6.8.9 1.7 2.2 2.3 4 2.3 4.3-.1 8.5 0 12.8 0h2.6c3.8 0 7.6 0 11.5-.1 1.2 0 1.9-.7 2.4-1.6 1.3-2.2 2.5-4.4 3.8-6.6 3-5.3 6-10.5 9-15.8.7-1.2 1-2.5.3-3.7-4.4-7.4-8.9-14.8-13.3-22.1-.8-1.3-1.6-2.5-3.3-2.5-8.7-.1-17.3 0-26 0-1.2 0-2.2.4-2.8 1.4-.7 1.1-1.3 2.2-1.9 3.3-3.8 6.6-7.7 13.1-11.5 19.8-.4.8-.5 2.1-.1 2.9 1.2 2.5 2.7 4.9 4.1 7.3.8 1.4 2.4 1.9 3.8 1.1 1.3-.7 1.9-2.3 1.2-3.7-.9-1.8-2-3.5-2.9-5.3-.2-.4-.2-1 0-1.4 1.4-2.5 2.9-5 4.4-7.5l6.9-11.7c.2-.3.6-.7 1-.7H67c.3 0 .7.2.9.5 4 6.5 7.9 13 11.8 19.6.2.3.1.9-.1 1.3-3.6 6.4-7.2 12.7-10.8 19.1-.3.6-.7.8-1.4.8-7.1 0-14.2-.1-21.2 0-1.5 0-2.3-.5-2.9-1.8-.9-1.8-1.9-3.5-3.1-5.2-1.2-1-2.9-1-4-.2z"
@@ -92,45 +115,45 @@ const SvgComponent = ({subRef, ...props}) => {
     // icon radial rhomb
     <radialGradient
       id="SVGID_00000043438429119311711940000004251891340924192142_" cx={55.591} cy={57.129} r={41.842} fx={56.149} fy={58.257} gradientUnits="userSpaceOnUse">
-      <stop offset={0} style={{ stopColor: secondary, stopOpacity: 0.6 }} />
-      <stop offset={1} style={{ stopColor: secondaryDark, stopOpacity: 0 }} />
+      <stop offset={0} style={{ stopColor: iconCenterFromColor, stopOpacity: 0.6 }} />
+      <stop offset={1} style={{ stopColor: iconCenterToColor, stopOpacity: 0 }} />
     </radialGradient>
     <path d="M45.4 75.4c.4 1.3 1.3 2 3.1 1.8.9-.1 2-.9 2.3-1.8L55 61.3c.2-.8.5-1.6.8-2.6.2.4.2.6.3.8 1.6 5.2 3.1 10.5 4.7 15.7.4 1.2 1.3 2 2.4 2 1.7.1 2.6-.5 3.1-1.9 1.9-6.2 3.9-12.5 5.8-18.8.3-.9.6-1.7.7-2.6.3-1.5-.6-2.8-2.1-3.2-1.4-.4-2.9.3-3.3 1.8-.9 2.8-1.8 5.7-2.7 8.5-.4 1.1-.7 2.3-1.1 3.6-.2-.5-.3-.8-.4-1-1.6-5.5-3.3-11-4.9-16.5-.3-1.1-1.3-1.9-2.4-1.9-1.1 0-2.2.8-2.5 1.9-1.3 4.3-2.6 8.7-3.9 13-.4 1.5-.9 2.9-1.4 4.6-.2-.4-.3-.7-.3-.9-1.1-3.6-2.2-7.1-3.3-10.7-.6-1.8-2-2.8-3.6-2.3s-2.3 2-1.8 3.8l3.3 10.8c.9 3.3 1.9 6.7 3 10z"
       style={{ fill: "url(#SVGID_00000043438429119311711940000004251891340924192142_)" }} />
     // icon radial w
     <radialGradient
       id="SVGID_00000053507860644401239740000013666557958016429751_" cx={55.591} cy={57.129} r={41.842} fx={56.149} fy={58.257} gradientUnits="userSpaceOnUse">
-      <stop offset={0} style={{ stopColor: secondary, stopOpacity: 0.7 }} />
-      <stop offset={1} style={{ stopColor: secondaryDark, stopOpacity: 0 }} />
+      <stop offset={0} style={{ stopColor: iconCenterFromColor, stopOpacity: 0.7 }} />
+      <stop offset={1} style={{ stopColor: iconCenterToColor, stopOpacity: 0 }} />
     </radialGradient>
     <path d="M36.2 72.1c-1.2.9-1.6 2.4-.8 3.7 1.3 2.3 2.6 4.5 3.8 6.8.9 1.7 2.2 2.3 4 2.3 4.3-.1 8.5 0 12.8 0h2.6c3.8 0 7.6 0 11.5-.1 1.2 0 1.9-.7 2.4-1.6 1.3-2.2 2.5-4.4 3.8-6.6 3-5.3 6-10.5 9-15.8.7-1.2 1-2.5.3-3.7-4.4-7.4-8.9-14.8-13.3-22.1-.8-1.3-1.6-2.5-3.3-2.5-8.7-.1-17.3 0-26 0-1.2 0-2.2.4-2.8 1.4-.7 1.1-1.3 2.2-1.9 3.3-3.8 6.6-7.7 13.1-11.5 19.8-.4.8-.5 2.1-.1 2.9 1.2 2.5 2.7 4.9 4.1 7.3.8 1.4 2.4 1.9 3.8 1.1 1.3-.7 1.9-2.3 1.2-3.7-.9-1.8-2-3.5-2.9-5.3-.2-.4-.2-1 0-1.4 1.4-2.5 2.9-5 4.4-7.5l6.9-11.7c.2-.3.6-.7 1-.7H67c.3 0 .7.2.9.5 4 6.5 7.9 13 11.8 19.6.2.3.1.9-.1 1.3-3.6 6.4-7.2 12.7-10.8 19.1-.3.6-.7.8-1.4.8-7.1 0-14.2-.1-21.2 0-1.5 0-2.3-.5-2.9-1.8-.9-1.8-1.9-3.5-3.1-5.2-1.2-1-2.9-1-4-.2z"
       style={{ fill: "url(#SVGID_00000053507860644401239740000013666557958016429751_)" }} />
 
     // word shadow
     <path d="M249.9 48.7h7.2l8.4 13.4h9.3v-1.3l-9.2-13.5c4.6-2.3 7.2-6.8 7.2-11.9 0-7.2-5-13.9-14.3-13.9-5.8-.1-11.5 0-17.3 0v40.6h8.7V48.7zm-.1-19.6h8.7c3.7 0 6 2.7 6 6.2.1 3.5-2.3 6.3-6 6.3h-8.7V29.1zM316.3 41.7c0-10.3-7-20.1-19.9-20.1h-15.1v40.5h15.1c13.1 0 20-10 19.9-20.4zm-26.4 12.6V29.4h6.3c7.4 0 11.4 5.9 11.4 12.3 0 6.5-3.9 12.5-11.4 12.5.1.1-6.3.1-6.3.1z"
-      fill={lighten(secondary, 0.6)}
+      fill={wordShadowColor}
     />
     <path d="M347.6 53c-.4-6-2.9-11.2-7.5-15-1.1-1.1-2.5-2.2-3.9-3.1.6.5 1.1.9 1.6 1.4l.3.3c4.1 4.2 5.5 9.1 5.5 14.1-.4 11.5-6.8 19.9-16.7 23.8-10.7 4.2-20.9 5-35.2 3s-31.9-6.8-48.9-10.6c-7.4-1.7-14.8-3.5-22.3-5.3 8.2-2.7 13.5-10.1 13.5-19.8 0-13.6-10-20.9-20.6-20.9-10.8 0-20.8 7.2-20.8 20.9 0 6.4 2.1 11.4 5.5 14.9-6.2-1.2-12.5-2.2-18.8-3l10.9-30.9v-1.3h-9.1L177 33.8l-3.4 13.5h-.2l-8.8-25.2h-3.5l-8.5 25.2h-.2l-3.6-13.5-4.1-12.4h-9.1v1.4l10.8 30.5c-.1 0-.3 0-.4.1-1.6.2-3.9.6-6.2 1.1-11.3 2.5-16 9.6-16.7 16.9-.5 4.7 2.6 10.2 5.8 12.6 1.5 1.2 2.3 1.8 3 2.2-.5-.4-1-.9-1.5-1.3-.1 0-.1-.2-.3-.3-8.1-8.3-4.2-21.3 8.1-25.3 1.8-.6 3.8-1.1 5.7-1.4 1.3-.2 2.6-.4 3.9-.5l1.8 5.2h5.3l2.1-5.8c4-.1 8 0 11.9.3l2 5.6h5.2l1.6-4.6c3.2.4 6.3 1 9.5 1.6 16.6 3.3 32.9 7.7 49.3 11.8 19.9 5 39.6 10.7 60.1 12.9 11.9 1.3 23.6.7 34.4-5 10.6-5.8 17.4-13.9 16.6-26.4zM213.4 28.9c6.3 0 12 4.3 12 12.9 0 8.9-5.7 13.1-12.1 13.1-6.5 0-12-4.2-12-13.1 0-8.6 5.7-12.9 12.1-12.9zm-54.8 23.5 4.2-11.9h.2l4.4 12.1c-3.1-.1-6-.2-8.8-.2z"
-      fill={lighten(secondary, 0.6)}
+      fill={wordShadowColor}
     />
     // word (r)
     <linearGradient id="SVGID_00000112627478275774070390000014790096468513668761_" x1={256.6} x2={256.6} y1={11.596} y2={77.331} gradientUnits="userSpaceOnUse">
-    <stop offset={0} style={{ stopColor: primaryLight }} />
-      <stop offset={1} style={{ stopColor: lighten(primaryDark, 0.1) }} />
+    <stop offset={0} style={{ stopColor: wordUpColor }} />
+      <stop offset={1} style={{ stopColor: wordDownColor }} />
     </linearGradient>
     <path d="M248.5 44.9h7.2l8.4 13.4h9.3V57l-9.2-13.5c4.6-2.3 7.2-6.8 7.2-11.9 0-7.2-5-13.9-14.3-13.9-5.8-.1-11.5 0-17.3 0v40.6h8.7V44.9zm-.1-19.6h8.7c3.7 0 6 2.7 6 6.2.1 3.5-2.3 6.3-6 6.3h-8.7V25.3z"
       style={{ fill: "url(#SVGID_00000112627478275774070390000014790096468513668761_)" }} />
     // word (d)
     <linearGradient id="SVGID_00000183958684602088700570000016022078090514897570_" x1={297.401} x2={297.401} y1={11.596} y2={77.331} gradientUnits="userSpaceOnUse">
-    <stop offset={0} style={{ stopColor: primaryLight }} />
-      <stop offset={1} style={{ stopColor: lighten(primaryDark, 0.1) }} />
+    <stop offset={0} style={{ stopColor: wordUpColor }} />
+      <stop offset={1} style={{ stopColor: wordDownColor }} />
     </linearGradient>
     <path d="M314.9 37.9c0-10.3-7-20.1-19.9-20.1h-15.1v40.5H295c13.1 0 20-10 19.9-20.4zm-26.4 12.6V25.6h6.3c7.4 0 11.4 5.9 11.4 12.3 0 6.5-3.9 12.5-11.4 12.5.1.1-6.3.1-6.3.1z"
       style={{ fill: "url(#SVGID_00000183958684602088700570000016022078090514897570_)" }} />
     // word (wo)
     <linearGradient id="SVGID_00000150080006471633748010000011754097649089819785_" x1={233.955} x2={233.955} y1={11.596} y2={77.331} gradientUnits="userSpaceOnUse">
-      <stop offset={0} style={{ stopColor: primaryLight }} />
-      <stop offset={1} style={{ stopColor: lighten(primaryDark, 0.1) }} />
+      <stop offset={0} style={{ stopColor: wordUpColor }} />
+      <stop offset={1} style={{ stopColor: wordDownColor }} />
     </linearGradient>
     <path d="M346.2 49.2c-.4-6-2.9-11.2-7.5-15-1.1-1.1-2.5-2.2-3.9-3.1.6.5 1.1.9 1.6 1.4l.3.3c4.1 4.2 5.5 9.1 5.5 14.1-.4 11.5-6.8 19.9-16.7 23.8-10.7 4.2-20.9 5-35.2 3s-31.9-6.8-48.9-10.6c-7.4-1.7-14.8-3.5-22.3-5.3 8.2-2.7 13.5-10.1 13.5-19.8 0-13.6-10-20.9-20.6-20.9-10.8 0-20.8 7.2-20.8 20.9 0 6.4 2.1 11.4 5.5 14.9-6.2-1.2-12.5-2.2-18.8-3L188.8 19v-1.3h-9.1L175.6 30l-3.4 13.5h-.2l-8.8-25.2h-3.5l-8.5 25.2h-.2L147.4 30l-4.1-12.4h-9.1V19L145 49.5c-.1 0-.3 0-.4.1-1.6.2-3.9.6-6.2 1.1-11.3 2.5-16 9.6-16.7 16.9-.5 4.7 2.6 10.2 5.8 12.6 1.5 1.2 2.3 1.8 3 2.2-.5-.4-1-.9-1.5-1.3-.1 0-.1-.2-.3-.3-8.1-8.3-4.2-21.3 8.1-25.3 1.8-.6 3.8-1.1 5.7-1.4 1.3-.2 2.6-.4 3.9-.5l1.8 5.2h5.3l2.1-5.8c4-.1 8 0 11.9.3l2 5.6h5.2l1.6-4.6c3.2.4 6.3 1 9.5 1.6 16.6 3.3 32.9 7.7 49.3 11.8 19.9 5 39.6 10.7 60.1 12.9 11.9 1.3 23.6.7 34.4-5 10.6-5.8 17.4-13.9 16.6-26.4zM212 25.1c6.3 0 12 4.3 12 12.9 0 8.9-5.7 13.1-12.1 13.1-6.5 0-12-4.2-12-13.1 0-8.6 5.7-12.9 12.1-12.9zm-54.8 23.5 4.2-11.9h.2l4.4 12.1c-3.1-.1-6-.2-8.8-.2z"
       style={{ fill: "url(#SVGID_00000150080006471633748010000011754097649089819785_)" }} />

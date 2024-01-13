@@ -4,9 +4,10 @@ import { Button, TextField, Typography } from "@mui/material";
 import Link from "../../Components/Link";
 import MainLayout from "../../Layouts/MainLayout";
 import AuthTextField from "../../Components/AuthTextField";
-
+import { useTheme } from "@emotion/react";
 
 function Register({ ...props }) {
+    let theme = useTheme();
     let { data, setData, errors, setError, post } = useForm({
         name: "",
         email: "",
@@ -14,7 +15,8 @@ function Register({ ...props }) {
         password_confirmation: "",
     });
     function input(field, label, type = "text") {
-        return <AuthTextField
+        return (
+            <AuthTextField
                 type={type}
                 name={field}
                 value={data[field]}
@@ -26,6 +28,7 @@ function Register({ ...props }) {
                 variant="filled"
                 className="mb-2 w-full"
             />
+        );
     }
     function onSignup(e) {
         e.preventDefault();
@@ -39,15 +42,29 @@ function Register({ ...props }) {
             {input("email", "E-mail")}
             {input("password", "Пароль")}
             {input("password_confirmation", "Повторите пароль")}
-            <Button type="submit" variant="contained" className="self-center px-8">Зарегистрироваться</Button>
+            <Button
+                type="submit"
+                color={theme.palette.mode == "dark" ? "contrast" : "primary"}
+                variant={
+                    theme.palette.mode == "dark" ? "outlined" : "contained"
+                }
+                className="self-center px-8"
+            >
+                Зарегистрироваться
+            </Button>
             <div className="mt-10">
-                <Typography variant="body1" className="inline" color="gray">Have you already registered? / </Typography>
+                <Typography
+                    variant="body1"
+                    className="inline"
+                    color="contrast.main"
+                >
+                    Have you already registered? /{" "}
+                </Typography>
                 <Link href={route("login")}>Login</Link>
             </div>
         </>
         //</AuthLayout>
     );
 }
-
 
 export default Register;

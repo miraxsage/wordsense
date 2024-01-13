@@ -1,7 +1,8 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import WordSenseLogo from "../Components/WordSenseLogo";
-import { createPortal } from "react-dom";
+import { useTheme } from "@emotion/react";
+import classes from "classnames";
 
 const OnAuthSubmitContext = createContext();
 
@@ -10,6 +11,7 @@ export function useOnAuthSubmit() {
 }
 
 export default function AuthLayout({ children, target }) {
+    let theme = useTheme();
     let overlapRef = useRef();
     let refrashOverlapId = null;
     let refreshOverlap = (withoutAnimation = false) => {
@@ -54,6 +56,7 @@ export default function AuthLayout({ children, target }) {
     let onSubmit = (e) => {
         submitHandlers.forEach((handler) => handler(e));
     };
+    let isLight = theme.palette.mode == "light";
     return (
         <div className="auth-container absolute top-0 grid h-[100svh] w-full items-center justify-items-center overflow-y-auto">
             <form
@@ -66,7 +69,15 @@ export default function AuthLayout({ children, target }) {
                     animate={{ transform: "scale(1) translate(-50%, -50%)" }}
                     transition={{ duration: 1 }}
                     ref={overlapRef}
-                    className="absolute left-1/2 top-1/2 -z-10 h-[150%] max-h-svh w-[150%] max-w-[calc(100vw-20px)] bg-white mix-blend-plus-lighter blur-[150px] transition-all duration-[3s]"
+                    className={classes(
+                        "absolute left-1/2 top-1/2 -z-10 h-[150%] max-h-svh w-[150%] max-w-[calc(100vw-20px)] blur-[150px] transition-all duration-[3s]",
+                        {
+                            "mix-blend-plus-lighter": isLight,
+                            "bg-white": isLight,
+                            "mix-blend-darken": !isLight,
+                            "bg-[#00000000]": !isLight, // bg-[#0d0f1f]
+                        },
+                    )}
                 />
                 <motion.div
                     initial={{ opacity: 0 }}

@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-#layout-animationed-background {
+/*#layout-animationed-background {
     --gradient-color-1: #6561e2;
-    --gradient-color-2: #caf0b8;
+    --gradient-color-2: #92a3f8;
     --gradient-color-3: #ffffff;
     --gradient-color-4: #92d6f8;
-}
+}*/
 
-#layout-non-animationed-background {
+.profile-layout-bg {
     background: linear-gradient(transparent, white 110%),
         radial-gradient(
             circle closest-corner at 30% center,
@@ -17,4 +17,7 @@
             transparent 150%
         ),
         linear-gradient(157deg, #635ee4 0%, #68c7ff 25%, white);
+}
+.profile-layout-bg__dark {
+    background: linear-gradient(#0d0f1e, #082232);
 }
