@@ -7,8 +7,10 @@ import { CssBaseline } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { StyledEngineProvider } from "@mui/material/styles";
 import MainLayout from "./Layouts/MainLayout";
+import deepMerge from "./Utilities/DeepMerge";
+import ColorModeContextProvider from "./Layouts/ColorModeContextProvider";
 
-const theme = {
+const basicTheme = {
     typography: {
         fontFamily: "Intro",
         fontSize: 15,
@@ -32,56 +34,79 @@ const theme = {
     },
 };
 
-const lightTheme = createTheme({
-    palette: {
-        primary: {
-            light: "#7464a2",
-            main: "#5a4793",
-            dark: "#3a316a",
+const lightTheme = createTheme(
+    deepMerge(basicTheme, {
+        palette: {
+            contrast: {
+                light: "#a8a8a8",
+                main: "#8e8e8e",
+                dark: "#6b6b6b",
+            },
+            primary: {
+                light: "#7464a2",
+                main: "#5a4793",
+                dark: "#3a316a",
+            },
+            secondary: {
+                light: "#9acee1",
+                main: "#57b0d9",
+                dark: "#4489bb",
+            },
+            thirdary: {
+                light: "#90d2c2",
+                main: "#53c6b7",
+                dark: "#42968b",
+            },
         },
-        secondary: {
-            light: "#9acee1",
-            main: "#57b0d9",
-            dark: "#4489bb",
-        },
-        thirdary: {
-            light: "#90d2c2",
-            main: "#53c6b7",
-            dark: "#42968b",
-        },
-    },
-    ...theme,
-});
+    }),
+);
 
-const darkTheme = createTheme({
-    palette: {
-        mode: "dark",
-        error: {
-            main: "#d34d56",
+const darkTheme = createTheme(
+    deepMerge(basicTheme, {
+        palette: {
+            mode: "dark",
+            error: {
+                main: "#d34d56",
+            },
+            contrast: {
+                light: "#ececec",
+                main: "#cdcdcd",
+                dark: "#a2a2a2",
+            },
+            thirdary: {
+                light: "#7464a2",
+                main: "#5a4793",
+                dark: "#3a316a",
+            },
+            secondary: {
+                light: "#9acee1",
+                main: "#57b0d9",
+                dark: "#4489bb",
+            },
+            primary: {
+                light: "#90d2c2",
+                main: "#53c6b7",
+                dark: "#42968b",
+            },
         },
-        contrast: {
-            light: "#ececec",
-            main: "#cdcdcd",
-            dark: "#a2a2a2",
+        components: {
+            MuiMenu: {
+                styleOverrides: {
+                    paper: {
+                        backgroundColor: "#080b1e",
+                    },
+                },
+            },
+            MuiTooltip: {
+                styleOverrides: {
+                    tooltip: {
+                        backgroundColor: "#262939",
+                    },
+                },
+            },
         },
-        thirdary: {
-            light: "#7464a2",
-            main: "#5a4793",
-            dark: "#3a316a",
-        },
-        secondary: {
-            light: "#9acee1",
-            main: "#57b0d9",
-            dark: "#4489bb",
-        },
-        primary: {
-            light: "#90d2c2",
-            main: "#53c6b7",
-            dark: "#42968b",
-        },
-    },
-    ...theme,
-});
+    }),
+);
 
 createInertiaApp({
     resolve(name) {
@@ -94,10 +119,16 @@ createInertiaApp({
     setup({ el, App, props }) {
         createRoot(el).render(
             <StyledEngineProvider injectFirst>
-                <ThemeProvider theme={darkTheme}>
-                    <CssBaseline />
-                    <App {...props} />
-                </ThemeProvider>
+                <ColorModeContextProvider>
+                    {(colorMode) => {
+                        return (
+                            <ThemeProvider theme={colorMode == "light" ? lightTheme : darkTheme}>
+                                <CssBaseline />
+                                <App {...props} />
+                            </ThemeProvider>
+                        );
+                    }}
+                </ColorModeContextProvider>
             </StyledEngineProvider>,
         );
     },

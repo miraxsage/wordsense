@@ -5,7 +5,10 @@ import SvgComponent from "./Svg";
 import classes from "classnames";
 
 export default function WordSenseLogo({ mode = "regular", updateDelay = 0, className, ...props }) {
-    if (mode != "forAuth") return <SvgComponent {...props} className={classes(className)} />;
+    if (mode != "forAuth") {
+        return <SvgComponent {...props} className={classes(className)} />;
+    }
+    // hooks below are not launch conditionally cause mode prop is not supposed to be changed after first render
     let imgRef = useRef();
     let fakeRef = useRef();
     let onChange = () => {

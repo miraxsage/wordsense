@@ -5,6 +5,8 @@ import Link from "../../Components/CustomLink";
 import { useOnAuthSubmit } from "../../Layouts/AuthLayout";
 import AuthTextField from "../../Components/AuthTextField";
 import { useTheme } from "@emotion/react";
+import LanguageToggler from "../../Components/LanguageToggler";
+import ColorModeToggler from "../../Components/ColorModeToggler";
 
 function Login({ status }) {
     let theme = useTheme();
@@ -61,6 +63,10 @@ function Login({ status }) {
                     Forgot password? /{" "}
                 </Typography>
                 <Link href={route("password.forgot")}>Restoration</Link>
+            </div>
+            <div className="mt-[40px] space-x-2 text-center">
+                <LanguageToggler />
+                <ColorModeToggler />
             </div>
         </>
     );
