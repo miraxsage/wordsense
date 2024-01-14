@@ -1,8 +1,7 @@
-import { router, useForm, usePage } from "@inertiajs/react";
-import { useState } from "react";
-import AuthLayout, { useOnAuthSubmit } from "../../Layouts/AuthLayout";
-import { Alert, Button, TextField } from "@mui/material";
-import Link from "../../Components/Link";
+import { useForm } from "@inertiajs/react";
+import { useOnAuthSubmit } from "../../Layouts/AuthLayout";
+import { Alert, Button } from "@mui/material";
+import Link from "../../Components/CustomLink";
 import AuthTextField from "../../Components/AuthTextField";
 import { useTheme } from "@emotion/react";
 
@@ -22,13 +21,7 @@ export default function Password({ mode = "request", email, token, success }) {
         }
     }
     useOnAuthSubmit()(send);
-    function input(
-        field,
-        label,
-        type = "text",
-        readOnly = false,
-        helperText = "",
-    ) {
+    function input(field, label, type = "text", readOnly = false, helperText = "") {
         return (
             <AuthTextField
                 type={type}
@@ -55,9 +48,7 @@ export default function Password({ mode = "request", email, token, success }) {
                     Go to Home page
                 </Link>
             )}
-            {mode == "reset" && (
-                <Link href={route("login")}>Go to Login page</Link>
-            )}
+            {mode == "reset" && <Link href={route("login")}>Go to Login page</Link>}
         </>
     ) : (
         <>
@@ -78,21 +69,15 @@ export default function Password({ mode = "request", email, token, success }) {
                 <Link
                     href={-1}
                     as="button"
-                    color={
-                        theme.palette.mode == "dark" ? "contrast" : "primary"
-                    }
+                    color={theme.palette.mode == "dark" ? "contrast" : "primary"}
                     className="self-center px-8"
                 >
                     Назад
                 </Link>
                 <Button
                     type="submit"
-                    color={
-                        theme.palette.mode == "dark" ? "contrast" : "primary"
-                    }
-                    variant={
-                        theme.palette.mode == "dark" ? "outlined" : "contained"
-                    }
+                    color={theme.palette.mode == "dark" ? "contrast" : "primary"}
+                    variant={theme.palette.mode == "dark" ? "outlined" : "contained"}
                     className="self-center px-8"
                 >
                     Отправить

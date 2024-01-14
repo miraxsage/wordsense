@@ -1,7 +1,8 @@
-import MainLayout from "@/Layouts/MainLayout";
+import CustomLink from "../../Components/CustomLink";
+
 export default function Main({ name }) {
     return (
-        <MainLayout>
+        <>
             <div
                 style={{
                     padding: "5px 8px",
@@ -11,6 +12,9 @@ export default function Main({ name }) {
             >
                 {"<Main>: " + name}
             </div>
-        </MainLayout>
+            <CustomLink href={route("login")} as="Button" variant="outlined">
+                Войти
+            </CustomLink>
+        </>
     );
 }

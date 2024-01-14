@@ -5,11 +5,7 @@ import { motion } from "framer-motion";
 import classes from "classnames";
 import { useTheme } from "@emotion/react";
 
-export default function ProfileLayout({
-    children,
-    useEnterAnimation,
-    ...props
-}) {
+export default function ProfileLayout({ children, useEnterAnimation, ...props }) {
     let theme = useTheme();
     let isLight = theme.palette.mode == "light";
     return (

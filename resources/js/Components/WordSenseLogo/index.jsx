@@ -4,14 +4,8 @@ import { motion } from "framer-motion";
 import SvgComponent from "./Svg";
 import classes from "classnames";
 
-export default function WordSenseLogo({
-    mode = "regular",
-    updateDelay = 0,
-    className,
-    ...props
-}) {
-    if (mode != "forAuth")
-        return <SvgComponent {...props} className={classes(className)} />;
+export default function WordSenseLogo({ mode = "regular", updateDelay = 0, className, ...props }) {
+    if (mode != "forAuth") return <SvgComponent {...props} className={classes(className)} />;
     let imgRef = useRef();
     let fakeRef = useRef();
     let onChange = () => {
@@ -34,9 +28,7 @@ export default function WordSenseLogo({
     });
     useLayoutEffect(() => {
         if (mode != "forAuth") return;
-        fakeRef.current
-            ?.closest(".auth-container")
-            ?.addEventListener("scroll", onChange);
+        fakeRef.current?.closest(".auth-container")?.addEventListener("scroll", onChange);
         window.addEventListener("resize", onChange);
         return () => {
             window.removeEventListener("resize", onChange);
@@ -46,10 +38,7 @@ export default function WordSenseLogo({
         <SvgComponent
             subRef={imgRef}
             {...props}
-            className={classes(
-                className,
-                "absolute hidden w-[350px] transition transition-[top]",
-            )}
+            className={classes(className, "absolute hidden w-[350px] transition transition-[top]")}
         />
     );
     if (mode == "forAuth")
@@ -67,10 +56,7 @@ export default function WordSenseLogo({
     return (
         <div>
             {createPortal(svgComponent, document.body)}
-            <div
-                ref={fakeRef}
-                className="mb-[10%] aspect-[822/350] w-full"
-            ></div>
+            <div ref={fakeRef} className="mb-[10%] aspect-[822/350] w-full"></div>
         </div>
     );
 }

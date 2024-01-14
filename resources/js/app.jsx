@@ -56,11 +56,6 @@ const lightTheme = createTheme({
 const darkTheme = createTheme({
     palette: {
         mode: "dark",
-        /* contrast: {
-            light: "#dff0f8",
-            main: "#bec8e2",
-            dark: "#98a2bc",
-        },*/
         error: {
             main: "#d34d56",
         },
@@ -93,9 +88,7 @@ createInertiaApp({
         const pages = import.meta.glob("./Pages/**/*.jsx", { eager: true });
         let page = pages[`./Pages/${name}.jsx`];
         if (page.default.layout) return page;
-        page.default.layout = (page) => (
-            <MainLayout target={name}>{page}</MainLayout>
-        );
+        page.default.layout = (page) => <MainLayout target={name}>{page}</MainLayout>;
         return page;
     },
     setup({ el, App, props }) {

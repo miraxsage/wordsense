@@ -1,14 +1,13 @@
 import { useForm } from "@inertiajs/react";
-import AuthLayout, { useOnAuthSubmit } from "../../Layouts/AuthLayout";
-import { Button, TextField, Typography } from "@mui/material";
-import Link from "../../Components/Link";
-import MainLayout from "../../Layouts/MainLayout";
+import { useOnAuthSubmit } from "../../Layouts/AuthLayout";
+import { Button, Typography } from "@mui/material";
+import Link from "../../Components/CustomLink";
 import AuthTextField from "../../Components/AuthTextField";
 import { useTheme } from "@emotion/react";
 
 function Register({ ...props }) {
     let theme = useTheme();
-    let { data, setData, errors, setError, post } = useForm({
+    let { data, setData, errors, post } = useForm({
         name: "",
         email: "",
         password: "",
@@ -36,7 +35,6 @@ function Register({ ...props }) {
     }
     useOnAuthSubmit()(onSignup);
     return (
-        //<AuthLayout onSubmit={onSignup}>
         <>
             {input("name", "Имя")}
             {input("email", "E-mail")}
@@ -45,25 +43,18 @@ function Register({ ...props }) {
             <Button
                 type="submit"
                 color={theme.palette.mode == "dark" ? "contrast" : "primary"}
-                variant={
-                    theme.palette.mode == "dark" ? "outlined" : "contained"
-                }
+                variant={theme.palette.mode == "dark" ? "outlined" : "contained"}
                 className="self-center px-8"
             >
                 Зарегистрироваться
             </Button>
             <div className="mt-10">
-                <Typography
-                    variant="body1"
-                    className="inline"
-                    color="contrast.main"
-                >
+                <Typography variant="body1" className="inline" color="contrast.main">
                     Have you already registered? /{" "}
                 </Typography>
                 <Link href={route("login")}>Login</Link>
             </div>
         </>
-        //</AuthLayout>
     );
 }
 

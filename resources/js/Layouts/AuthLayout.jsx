@@ -17,29 +17,17 @@ export default function AuthLayout({ children, target }) {
     let refreshOverlap = (withoutAnimation = false) => {
         if (refrashOverlapId) clearTimeout(refrashOverlapId);
         if (withoutAnimation)
-            overlapRef.current.classList.remove(
-                "transition-all",
-                "duration-[3s]",
-            );
+            overlapRef.current.classList.remove("transition-all", "duration-[3s]");
         let refresh = () => {
             let form = overlapRef.current.parentElement;
             let { width, height } = form.getBoundingClientRect();
-            let vw = Math.max(
-                document.documentElement.clientWidth || 0,
-                window.innerWidth || 0,
-            );
-            let vh = Math.max(
-                document.documentElement.clientHeight || 0,
-                window.innerHeight || 0,
-            );
+            let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+            let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
             overlapRef.current.style.width = Math.min(width * 1.5, vw) + "px";
             overlapRef.current.style.height = Math.min(height * 1.2, vh) + "px";
             if (withoutAnimation)
                 requestAnimationFrame(() =>
-                    overlapRef.current.classList.add(
-                        "transition-all",
-                        "duration-[3s]",
-                    ),
+                    overlapRef.current.classList.add("transition-all", "duration-[3s]"),
                 );
         };
         if (withoutAnimation) refresh();
@@ -49,8 +37,7 @@ export default function AuthLayout({ children, target }) {
     useEffect(() => {
         let refreshOverlapOnResize = () => refreshOverlap(true);
         window.addEventListener("resize", refreshOverlapOnResize);
-        return () =>
-            window.removeEventListener("resize", refreshOverlapOnResize);
+        return () => window.removeEventListener("resize", refreshOverlapOnResize);
     }, []);
     let submitHandlers = [];
     let onSubmit = (e) => {
@@ -59,10 +46,7 @@ export default function AuthLayout({ children, target }) {
     let isLight = theme.palette.mode == "light";
     return (
         <div className="auth-container absolute top-0 grid h-[100svh] w-full items-center justify-items-center overflow-y-auto">
-            <form
-                onSubmit={onSubmit}
-                className="relative w-9/12 max-w-[350px] py-10 sm:w-6/12"
-            >
+            <form onSubmit={onSubmit} className="relative w-9/12 max-w-[350px] py-10 sm:w-6/12">
                 <WordSenseLogo mode="forAuth" updateDelay="0.2" />
                 <motion.div
                     initial={{ transform: "scale(0) translate(-50%, -50%)" }}
@@ -95,9 +79,7 @@ export default function AuthLayout({ children, target }) {
                             exit={{ opacity: 0, transform: "scale(0.93)" }}
                         >
                             <OnAuthSubmitContext.Provider
-                                value={(handler) =>
-                                    submitHandlers.push(handler)
-                                }
+                                value={(handler) => submitHandlers.push(handler)}
                             >
                                 {children}
                             </OnAuthSubmitContext.Provider>

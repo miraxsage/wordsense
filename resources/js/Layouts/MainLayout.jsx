@@ -6,7 +6,7 @@ import AuthLayout from "./AuthLayout";
 import { useTheme } from "@emotion/react";
 import classes from "classnames";
 
-export default function MainLayout({ children, target }) {
+export default function MainLayout({ children, target = "" }) {
     let previousTarget = useRef();
     let theme = useTheme();
     let isLight = theme.palette.mode == "light";
@@ -18,22 +18,20 @@ export default function MainLayout({ children, target }) {
         var gradient = new Gradient();
         gradient.initGradient("#layout-animationed-background");
     }, [theme.palette.mode]);
-    let layout = target.startsWith("Auth/") ? "Auth" : "Layout";
+    let layout = target.startsWith("Auth/")
+        ? "Auth"
+        : target.startsWith("Home/")
+          ? "Home"
+          : "Profile";
     if (layout == "Auth")
         children = (
-            <AuthLayout
-                useEnterAnimation={previousTarget.current != null}
-                target={target}
-            >
+            <AuthLayout useEnterAnimation={previousTarget.current != null} target={target}>
                 {children}
             </AuthLayout>
         );
-    else
+    else if (layout == "Profile")
         children = (
-            <ProfileLayout
-                useEnterAnimation={previousTarget.current != null}
-                target={target}
-            >
+            <ProfileLayout useEnterAnimation={previousTarget.current != null} target={target}>
                 {children}
             </ProfileLayout>
         );
@@ -44,10 +42,7 @@ export default function MainLayout({ children, target }) {
                 id="layout-animationed-background"
                 style={{
                     ...Object.fromEntries(
-                        gradientColors.map((c, i) => [
-                            `--gradient-color-${i + 1}`,
-                            c,
-                        ]),
+                        gradientColors.map((c, i) => [`--gradient-color-${i + 1}`, c]),
                     ),
                 }}
                 className="fixed left-0 top-0 -z-10 h-svh w-full"
@@ -59,11 +54,7 @@ export default function MainLayout({ children, target }) {
                 })}
                 initial={false}
                 animate={{
-                    opacity: target.startsWith("Auth/")
-                        ? 0
-                        : isLight
-                          ? 0.85
-                          : 1,
+                    opacity: layout != "Profile" ? 0 : isLight ? 0.85 : 1,
                 }}
                 transition={{ duration: 3, ease: "easeInOut" }}
             />
@@ -74,18 +65,4 @@ export default function MainLayout({ children, target }) {
     );
     previousTarget.current = target;
     return result;
-    /* let ref = useRef();
-    if (!ref.current) ref.current = 0;
-    ref.current++;
-    return (
-        <div className="border border-black">
-            Total renders: {ref.current}
-            <header>
-                <Link href="/">Home</Link>
-                <br />
-                <Link href="/profile">Profile</Link>
-            </header>
-            {children}
-        </div>
-    );*/
 }

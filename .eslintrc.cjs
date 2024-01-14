@@ -7,6 +7,7 @@ module.exports = {
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:prettier/recommended",
+        "plugin:react-hooks/recommended",
     ],
     overrides: [
         {
@@ -27,6 +28,6 @@ module.exports = {
     rules: {
         "react/prop-types": "off",
         "react/react-in-jsx-scope": "off",
-        "prettier/prettier": ["warn", { endOfLine: "auto" }],
+        "prettier/prettier": ["warn", { endOfLine: "auto", printWidth: 100 }],
     },
 };

@@ -2,38 +2,29 @@ import { useTheme } from "@emotion/react";
 import { darken, lighten } from "@mui/material";
 import * as React from "react"
 const SvgComponent = ({subRef, ...props}) => {
-  let theme = useTheme();
-  // let primary = theme.palette.primary.main;
-  // let primaryLight = theme.palette.primary.light;
-  // let primaryDark = theme.palette.primary.dark;
-  // let secondary = theme.palette.secondary.main;
-  // let secondaryLight = theme.palette.secondary.light;
-  // let secondaryDark = theme.palette.secondary.dark;
-  // let thirdary = theme.palette.thirdary.main;
-  // let thirdaryDark = theme.palette.thirdary.dark;
-  // let thirdaryLight = theme.palette.thirdary.light;
+    let theme = useTheme();
 
-  let senseTopColor = theme.palette.secondary.main;
-  let senseBottomColor = darken(theme.palette.primary.main, 0.2);
-  let iconTopColor = theme.palette.thirdary.main;
-  let iconCenterFromColor = theme.palette.secondary.main;
-  let iconCenterToColor = theme.palette.secondary.dark;
-  let iconBottomColor = theme.palette.primary.main;
-  let wordShadowColor = lighten(theme.palette.secondary.main, 0.6);
-  let wordUpColor = theme.palette.primary.light;
-  let wordDownColor = lighten(theme.palette.primary.dark, 0.1);
+    let senseTopColor = theme.palette.secondary.main;
+    let senseBottomColor = darken(theme.palette.primary.main, 0.2);
+    let iconTopColor = theme.palette.thirdary.main;
+    let iconCenterFromColor = theme.palette.secondary.main;
+    let iconCenterToColor = theme.palette.secondary.dark;
+    let iconBottomColor = theme.palette.primary.main;
+    let wordShadowColor = lighten(theme.palette.secondary.main, 0.6);
+    let wordUpColor = theme.palette.primary.light;
+    let wordDownColor = lighten(theme.palette.primary.dark, 0.1);
 
-  if(theme.palette.mode == "dark"){
-    wordUpColor = theme.palette.contrast.light;
-    wordDownColor = darken("#7e8ca6", 0.1);
-    wordShadowColor = lighten("#282634", 0.05);
-    iconTopColor = wordUpColor;
-    iconBottomColor = darken(wordDownColor, 0.1);
-    iconCenterToColor = iconBottomColor;
-    iconCenterFromColor = iconTopColor;
-    senseBottomColor = darken(theme.palette.secondary.main, 0.4);
-    senseTopColor = lighten(theme.palette.primary.main, 0.5);
-  }
+    if(theme.palette.mode == "dark"){
+        wordUpColor = theme.palette.contrast.light;
+        wordDownColor = darken("#7e8ca6", 0.1);
+        wordShadowColor = lighten("#282634", 0.05);
+        iconTopColor = wordUpColor;
+        iconBottomColor = darken(wordDownColor, 0.1);
+        iconCenterToColor = iconBottomColor;
+        iconCenterFromColor = iconTopColor;
+        senseBottomColor = darken(theme.palette.secondary.main, 0.4);
+        senseTopColor = lighten(theme.palette.primary.main, 0.5);
+    }
 
   return <svg
     xmlns="http://www.w3.org/2000/svg"
