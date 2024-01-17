@@ -30,4 +30,8 @@ module.exports = {
         "react/react-in-jsx-scope": "off",
         "prettier/prettier": ["warn", { endOfLine: "auto", printWidth: 100 }],
     },
+    globals: {
+        route: "readonly",
+        __: "readonly",
+    },
 };

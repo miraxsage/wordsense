@@ -7,6 +7,7 @@
     @viteReactRefresh
     @vite('resources/js/app.jsx')
     @inertiaHead
+    @translations
 </head>
 <body>
     @inertia

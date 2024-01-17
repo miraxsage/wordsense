@@ -8,7 +8,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { StyledEngineProvider } from "@mui/material/styles";
 import MainLayout from "./Layouts/MainLayout";
 import deepMerge from "./Utilities/DeepMerge";
-import ColorModeContextProvider from "./Layouts/ColorModeContextProvider";
+import CustomizationContextProvider from "./Layouts/CustomizationContextProvider";
 
 const basicTheme = {
     typography: {
@@ -119,16 +119,18 @@ createInertiaApp({
     setup({ el, App, props }) {
         createRoot(el).render(
             <StyledEngineProvider injectFirst>
-                <ColorModeContextProvider>
-                    {(colorMode) => {
+                <CustomizationContextProvider>
+                    {(customSettings) => {
                         return (
-                            <ThemeProvider theme={colorMode == "light" ? lightTheme : darkTheme}>
+                            <ThemeProvider
+                                theme={customSettings.colorMode == "light" ? lightTheme : darkTheme}
+                            >
                                 <CssBaseline />
                                 <App {...props} />
                             </ThemeProvider>
                         );
                     }}
-                </ColorModeContextProvider>
+                </CustomizationContextProvider>
             </StyledEngineProvider>,
         );
     },

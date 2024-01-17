@@ -3,22 +3,22 @@ import ru from "./Russian.svg";
 import en from "./English.svg";
 import { useRef, useState } from "react";
 import classes from "classnames";
-import { useIsLighMode } from "../../Utilities/ServiceHooks";
+import { useIsLighMode, useLanguage } from "../../Layouts/CustomizationContextProvider";
 
-export default function LanguageButton({ onChange }) {
+export default function LanguageButton() {
     let [opened, setOpened] = useState(false);
     let isLightMode = useIsLighMode();
+    let [language, setLanguage] = useLanguage();
     let iconRef = useRef();
     let changeHandler = (lang) => {
         return () => {
             setOpened(false);
-            if (onChange) onChange(lang);
+            setLanguage(lang);
         };
     };
-    let clickHandler = () => {};
     return (
         <>
-            <Tooltip title="Выбрать язык">
+            <Tooltip title={__("Choose language")}>
                 <Button
                     className={classes(
                         {
@@ -38,7 +38,7 @@ export default function LanguageButton({ onChange }) {
                 >
                     <img
                         className={classes("aspect-[1/1] w-[25px] rounded object-cover")}
-                        src={en}
+                        src={{ ru, en }[language]}
                     />
                 </Button>
             </Tooltip>
@@ -48,7 +48,6 @@ export default function LanguageButton({ onChange }) {
                 anchorEl={iconRef.current}
                 open={opened}
                 onClose={() => setOpened(false)}
-                onClick={clickHandler}
                 transformOrigin={{ horizontal: "center", vertical: "top" }}
                 anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
             >
@@ -56,7 +55,7 @@ export default function LanguageButton({ onChange }) {
                     <img className="mr-3 w-[25px]" src={en} />
                     English
                 </MenuItem>
-                <MenuItem onClick={changeHandler("en")}>
+                <MenuItem onClick={changeHandler("ru")}>
                     <img className="mr-3 w-[25px]" src={ru} />
                     Russian
                 </MenuItem>

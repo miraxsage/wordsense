@@ -5,7 +5,7 @@ import Link from "../../Components/CustomLink";
 import AuthTextField from "../../Components/AuthTextField";
 import { useTheme } from "@emotion/react";
 
-function Register({ ...props }) {
+function Register() {
     let theme = useTheme();
     let { data, setData, errors, post } = useForm({
         name: "",
@@ -36,23 +36,23 @@ function Register({ ...props }) {
     useOnAuthSubmit()(onSignup);
     return (
         <>
-            {input("name", "Имя")}
+            {input("name", __("Name"))}
             {input("email", "E-mail")}
-            {input("password", "Пароль")}
-            {input("password_confirmation", "Повторите пароль")}
+            {input("password", __("Password"))}
+            {input("password_confirmation", __("Retype password"))}
             <Button
                 type="submit"
                 color={theme.palette.mode == "dark" ? "contrast" : "primary"}
                 variant={theme.palette.mode == "dark" ? "outlined" : "contained"}
                 className="self-center px-8"
             >
-                Зарегистрироваться
+                {__("Register up")}
             </Button>
             <div className="mt-10">
                 <Typography variant="body1" className="inline" color="contrast.main">
-                    Have you already registered? /{" "}
+                    {__("Have you already registered?")} /{" "}
                 </Typography>
-                <Link href={route("login")}>Login</Link>
+                <Link href={route("login")}>{__("Go to Login page")}</Link>
             </div>
         </>
     );

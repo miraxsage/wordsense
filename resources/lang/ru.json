@@ -1,0 +1,23 @@
+{
+    "Log in": "Войти",
+    "Back": "Назад",
+    "Send": "Отправить",
+    "Restore": "Восстановить",
+    "Registration": "Регистрация",
+    "Go to Home page": "На главную",
+    "Go to Login page": "На страницу авторизации",
+    "Register up": "Зарегистрироваться",
+
+    "Login": "Логин",
+    "Password": "Пароль",
+    "Retype password": "Повторите пароль",
+    "Name": "Имя",
+
+    "Haven't you registered yet?": "Еще не зарегистрированы?",
+    "Have you already registered?": "Уже зарегистрированы?",
+    "Forgot password?": "Забыли пароль?",
+    "Switch to light mode": "Включить светлый режим",
+    "Switch to dark mode": "Включить темный режим",
+    "Choose language": "Выбрать язык",
+    "Type in your email address that are going to be sent letter for restoring your password": "Укажите Ваш адрес электронной почты, на который будет отправлено письмо для восстановления пароля"
+}

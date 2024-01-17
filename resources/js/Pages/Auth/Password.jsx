@@ -45,10 +45,10 @@ export default function Password({ mode = "request", email, token, success }) {
             </Alert>
             {mode == "request" && (
                 <Link href="/" as="Button" variant="outlined">
-                    Go to Home page
+                    {__("Go to Home page")}
                 </Link>
             )}
-            {mode == "reset" && <Link href={route("login")}>Go to Login page</Link>}
+            {mode == "reset" && <Link href={route("login")}>{__("Go to Login page")}</Link>}
         </>
     ) : (
         <>
@@ -57,7 +57,9 @@ export default function Password({ mode = "request", email, token, success }) {
                 "E-mail",
                 "text",
                 mode != "request",
-                "Укажите Ваш E-mail, на который будет отправлено письмо для восстановления пароля",
+                __(
+                    "Type in your email address that are going to be sent letter for restoring your password",
+                ),
             )}
             {mode == "reset" && (
                 <>
@@ -72,7 +74,7 @@ export default function Password({ mode = "request", email, token, success }) {
                     color={theme.palette.mode == "dark" ? "contrast" : "primary"}
                     className="self-center px-8"
                 >
-                    Назад
+                    {__("Back")}
                 </Link>
                 <Button
                     type="submit"
@@ -80,7 +82,7 @@ export default function Password({ mode = "request", email, token, success }) {
                     variant={theme.palette.mode == "dark" ? "outlined" : "contained"}
                     className="self-center px-8"
                 >
-                    Отправить
+                    {__("Send")}
                 </Button>
             </div>
         </>
