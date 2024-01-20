@@ -7,7 +7,7 @@ import { CssBaseline } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { StyledEngineProvider } from "@mui/material/styles";
 import MainLayout from "./Layouts/MainLayout";
-import deepMerge from "./Utilities/DeepMerge";
+import deepMerge from "./Utilities/Functions";
 import CustomizationContextProvider from "./Layouts/CustomizationContextProvider";
 
 const basicTheme = {

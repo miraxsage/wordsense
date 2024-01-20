@@ -52,7 +52,7 @@ export default function ProfileLayout({ children, useEnterAnimation }) {
                 ></div>
             </motion.div>
             <motion.div
-                className="grid h-full w-full grid-rows-[auto_minmax(0,_1fr)]"
+                className="grid h-full w-full grid-rows-[auto_minmax(0,_1fr)] px-6"
                 initial={!useEnterAnimation ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{

@@ -7,6 +7,7 @@ import { useTheme } from "@emotion/react";
 import classes from "classnames";
 
 export default function MainLayout({ children, target = "" }) {
+    let gragientRef = useRef();
     let previousTarget = useRef();
     let theme = useTheme();
     let isLight = theme.palette.mode == "light";
@@ -15,8 +16,9 @@ export default function MainLayout({ children, target = "" }) {
             ? ["#6561e2", "#92a3f8", "#ffffff", "#92d6f8"]
             : ["#0f0f19", "#0d0f1e", "#022238", "#00313c"];
     useEffect(() => {
-        var gradient = new Gradient();
-        gradient.initGradient("#layout-animationed-background");
+        if (gragientRef.current) gragientRef.current.dispose();
+        gragientRef.current = new Gradient();
+        gragientRef.current.initGradient("#layout-animationed-background");
     }, [theme.palette.mode]);
     let layout = target.startsWith("Auth/")
         ? "Auth"
@@ -38,7 +40,6 @@ export default function MainLayout({ children, target = "" }) {
     let result = (
         <div>
             <canvas
-                key={theme.palette.mode}
                 id="layout-animationed-background"
                 style={{
                     ...Object.fromEntries(
@@ -47,6 +48,11 @@ export default function MainLayout({ children, target = "" }) {
                 }}
                 className="fixed left-0 top-0 -z-10 h-svh w-full"
             ></canvas>
+            <motion.div
+                className={classes("fixed left-0 top-0 -z-10 h-svh w-full", {
+                    "profile-layout-bg__overlap-dark": !isLight,
+                })}
+            />
             <motion.div
                 className={classes("fixed left-0 top-0 -z-10 h-svh w-full", {
                     "profile-layout-bg": isLight,

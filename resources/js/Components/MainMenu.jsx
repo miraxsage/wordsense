@@ -14,42 +14,98 @@ import {
 import PersonIcon from "@mui/icons-material/Person";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
+import FontDownloadIcon from "@mui/icons-material/FontDownload";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import SpellcheckIcon from "@mui/icons-material/Spellcheck";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import InfoIcon from "@mui/icons-material/Info";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { router } from "@inertiajs/react";
+import classes from "classnames";
+import { areEqualShallow } from "../Utilities/Functions";
 
 export default function MainMenu() {
+    let theme = useTheme();
+
     let [tab, setTab] = useState(1);
+    let tabsRef = useRef();
+
     let [profileMenuAnchor, setProfileMenuAnchor] = useState();
+    let profileMenuClick = (e) => {
+        setProfileMenuAnchor(e.currentTarget);
+    };
+    let profileMenuIsOpen = Boolean(profileMenuAnchor);
+    let profileMenuClose = () => {
+        setProfileMenuAnchor(null);
+    };
+
     let [hoverIndicator, setHoverIndicator] = useState({
         left: 0,
         width: 0,
         hovered: false,
         initial: true,
     });
-    let theme = useTheme();
-    let onTabMouseIn = (e) => {
-        let menu = e.target.closest(".main-menu");
-        let tabBox = e.target.getBoundingClientRect();
+    let updateHoverIndicator = (tabElement) => {
+        if (!tabElement) return;
+        let menu = tabElement.closest(".main-menu");
+        let tabBox = tabElement.getBoundingClientRect();
         let menuBox = menu.getBoundingClientRect();
-        setHoverIndicator({
+        let newHoverIndicatorState = {
             left: tabBox.left - menuBox.left,
             width: tabBox.width,
             hovered: true,
             initial: hoverIndicator.initial ? (hoverIndicator.hovered ? false : true) : false,
-        });
+        };
+        if (!areEqualShallow(hoverIndicator, newHoverIndicatorState)) {
+            setHoverIndicator({
+                left: tabBox.left - menuBox.left,
+                width: tabBox.width,
+                hovered: true,
+                initial: hoverIndicator.initial ? (hoverIndicator.hovered ? false : true) : false,
+            });
+        }
     };
     let onTabMouseOut = () => {
         setHoverIndicator({ ...hoverIndicator, hovered: false, initial: true });
     };
-    let tabProps = { onMouseEnter: onTabMouseIn, onMouseLeave: onTabMouseOut };
-    let profileMenuClick = (e) => {
-        setProfileMenuAnchor(e.currentTarget);
+    useEffect(() => {
+        requestAnimationFrame(() => {
+            let hoveredTab = tabsRef.current.querySelector(".MuiTab-root:hover");
+            updateHoverIndicator(hoveredTab);
+        });
+    });
+    let getMainTab = (label, icon, id) => {
+        let active = id == tab;
+        let iconMaxSize = active ? "30px" : "0";
+        let iconMRight = active ? "8px" : "0";
+        return (
+            <Tab
+                sx={{
+                    minHeight: "48px",
+                }}
+                label={label}
+                icon={
+                    <motion.div
+                        className={classes("overflow-hidden", { active })}
+                        animate={{ maxWidth: iconMaxSize, marginRight: iconMRight }}
+                        transition={{ duration: 0.2, delay: active ? 0.2 : 0 }}
+                    >
+                        {icon}
+                    </motion.div>
+                }
+                iconPosition="start"
+                id={"item-" + id}
+                onMouseEnter={(e) => updateHoverIndicator(e.target)}
+                onMouseLeave={onTabMouseOut}
+            />
+        );
     };
-    let profileMenuClose = ({ ...args }) => {
-        setProfileMenuAnchor(null);
+
+    let setActiveTab = (e, v) => {
+        setTab(v);
     };
-    let profileMenuIsOpen = Boolean(profileMenuAnchor);
+
     return (
         <div className="flex w-full items-end gap-4">
             <Box
@@ -60,13 +116,41 @@ export default function MainMenu() {
                     position: "relative",
                 }}
             >
-                <Tabs className="mb-[-1px]" value={tab} onChange={(e, v) => setTab(v)}>
+                <Tabs
+                    ref={tabsRef}
+                    className="mb-[-1px]"
+                    value={tab}
+                    onChange={setActiveTab}
+                    sx={{
+                        "& .MuiTab-root.Mui-selected:hover::before": {
+                            content: '""',
+                            width: "50%",
+                            position: "absolute",
+                            left: 0,
+                            bottom: 0,
+                            height: "2px",
+                            background: theme.palette.secondary.main,
+                        },
+                        "& .MuiTab-root::after": {
+                            content: '""',
+                            width: "0",
+                            position: "absolute",
+                            bottom: 0,
+                            height: "2px",
+                            background: theme.palette.primary.main,
+                        },
+                        "& .MuiTab-root.Mui-selected::after": {
+                            width: "100%",
+                            transition: "all 0.2s",
+                            transitionDelay: "0.15s",
+                        },
+                    }}
+                >
                     <motion.div
                         className="absolute bottom-0 h-[2px]"
-                        style={{ width: hoverIndicator.width + "px" }}
-                        animate={{ left: hoverIndicator.left }}
+                        animate={{ left: hoverIndicator.left, width: hoverIndicator.width + "px" }}
                         transition={{
-                            duration: hoverIndicator.initial ? 0 : 0.2,
+                            duration: hoverIndicator.initial ? 0 : 0.1,
                         }}
                     >
                         <motion.div
@@ -78,10 +162,11 @@ export default function MainMenu() {
                             transition={{ duration: 0.2 }}
                         />
                     </motion.div>
-
-                    <Tab label="Item One" id="item-0" {...tabProps} />
-                    <Tab label="Item Two" id="item-1" {...tabProps} />
-                    <Tab label="Item Three" id="item-2" {...tabProps} />
+                    {getMainTab("Dictionary", <FontDownloadIcon />, 1)}
+                    {getMainTab("Textbook", <MenuBookIcon />, 2)}
+                    {getMainTab("My words", <AssignmentIcon />, 3)}
+                    {getMainTab("Excercises", <SpellcheckIcon />, 4)}
+                    {getMainTab("About", <InfoIcon />, 5)}
                 </Tabs>
             </Box>
             <Tooltip title="Профиль">

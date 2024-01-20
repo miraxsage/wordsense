@@ -62,7 +62,7 @@ function Login(/*{ status }*/) {
                 <Typography variant="body1" className="inline" color="contrast.main">
                     {__("Forgot password?")} /{" "}
                 </Typography>
-                <Link href={route("password.forgot")}>{__("Restore")}</Link>
+                <Link href={route("password.forgot")}>{__("Restoration")}</Link>
             </div>
             <div className="mt-[40px] space-x-2 text-center">
                 <LanguageToggler />

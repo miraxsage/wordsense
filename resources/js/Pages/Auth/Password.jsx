@@ -63,8 +63,8 @@ export default function Password({ mode = "request", email, token, success }) {
             )}
             {mode == "reset" && (
                 <>
-                    {input("password", "Пароль")}
-                    {input("password_confirmation", "Повторите пароль")}
+                    {input("password", __("Password"))}
+                    {input("password_confirmation", __("Retype password"))}
                 </>
             )}
             <div className="flex justify-center gap-2">

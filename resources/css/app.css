@@ -11,12 +11,12 @@
 
 .profile-layout-bg {
     background: linear-gradient(transparent, white 110%),
-        radial-gradient(
-            circle closest-corner at 30% center,
-            #98d8b7,
-            transparent 150%
-        ),
+        radial-gradient(circle closest-corner at 30% center, #98d8b7, transparent 150%),
         linear-gradient(157deg, #635ee4 0%, #68c7ff 25%, white);
+}
+.profile-layout-bg__overlap-dark {
+    mix-blend-mode: darken;
+    background: linear-gradient(#060a18f7, #7d7d7d 257%);
 }
 .profile-layout-bg__dark {
     background: linear-gradient(#0d0f1e, #082232);

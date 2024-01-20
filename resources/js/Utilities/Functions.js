@@ -13,3 +13,17 @@ export default function deepMerge(obj1, obj2) {
         return obj;
     }
 }
+export function areEqualShallow(a, b) {
+    if (typeof a != "object" || typeof b != "object") return a === b;
+    for (let key in a) {
+        if (!(key in b) || a[key] !== b[key]) {
+            return false;
+        }
+    }
+    for (let key in b) {
+        if (!(key in a)) {
+            return false;
+        }
+    }
+    return true;
+}
